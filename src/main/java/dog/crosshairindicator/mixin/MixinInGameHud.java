@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderPipeline;
 
 @Mixin(InGameHud.class)
 public class MixinInGameHud {
