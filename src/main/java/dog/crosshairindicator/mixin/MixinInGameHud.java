@@ -24,16 +24,13 @@ public class MixinInGameHud {
 
     @Inject(method = "renderCrosshair", at = @At("TAIL"))
 	private void drawCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        if (this.client.targetedEntity instanceof PlayerEntity) {
-            int scaledWidth = 15;
-            int scaledHeight = 15;
-
-            if (this.client.targetedEntity.isBlocking()) {
-                context.drawGuiTexture(RenderLayer::getCrosshair, SHIELD_CROSSHAIR, (context.getScaledWindowWidth() - scaledWidth) / 2, (context.getScaledWindowHeight() - scaledHeight) / 2, scaledWidth, scaledHeight);
-            } else {
-                context.drawGuiTexture(RenderLayer::getCrosshair, CUSTOM_CROSSHAIR, (context.getScaledWindowWidth() - scaledWidth) / 2, (context.getScaledWindowHeight() - scaledHeight) / 2, scaledWidth, scaledHeight);
-            }
+	if (this.client.targetedEntity instanceof PlayerEntity player) {
+		int size = 15;
+		int x = (context.getScaledWindowWidth() - size) / 2;
+		int y = (context.getScaledWindowHeight() - size) / 2;
+	
+		Identifier texture = player.isBlocking() ? CUSTOM_CROSSHAIR : SHIELD_CROSSHAIR;
+		context.drawTexture(texture, x, y, 0.0F, 0.0F, size, size, size, size);
         }
     }
-
 }
