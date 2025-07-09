@@ -34,11 +34,10 @@ public class MixinInGameHud {
 
             Identifier texture = player.isBlocking() ? SHIELD_CROSSHAIR : CUSTOM_CROSSHAIR;
 
-            context.drawGuiTexture(
-                RenderLayer.getTranslucent(),
+            context.drawTexture(
                 texture,
                 x, y,
-                size, size,
+                0, 0,
                 size, size
             );
         }
