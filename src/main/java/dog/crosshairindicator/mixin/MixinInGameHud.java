@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderPipeline;
 
 @Mixin(InGameHud.class)
 public class MixinInGameHud {
@@ -33,7 +32,7 @@ private void drawCrosshair(DrawContext context, RenderTickCounter tickCounter, C
         Identifier texture = player.isBlocking() ? SHIELD_CROSSHAIR : CUSTOM_CROSSHAIR;
 
         context.drawTexture(
-            RenderPipeline::guiTextured,
+            RenderPipeline::getGui,
             texture,
             x, y,
             0.0F, 0.0F,
