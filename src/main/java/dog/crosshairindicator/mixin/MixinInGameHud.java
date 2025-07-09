@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderPipeline;
 
 @Mixin(InGameHud.class)
 public class MixinInGameHud {
@@ -23,14 +24,22 @@ public class MixinInGameHud {
 	@Unique Identifier SHIELD_CROSSHAIR = Identifier.of("crosshairindicator", "shield_crosshair");
 
     @Inject(method = "renderCrosshair", at = @At("TAIL"))
-	private void drawCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-	if (this.client.targetedEntity instanceof PlayerEntity player) {
-		int size = 15;
-		int x = (context.getScaledWindowWidth() - size) / 2;
-		int y = (context.getScaledWindowHeight() - size) / 2;
-	
-		Identifier texture = player.isBlocking() ? CUSTOM_CROSSHAIR : SHIELD_CROSSHAIR;
-		context.drawTexture(texture, x, y, 0.0F, 0.0F, size, size, size, size);
-        }
+private void drawCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    if (this.client.targetedEntity instanceof PlayerEntity player) {
+        int size = 15;
+        int x = (context.getScaledWindowWidth() - size) / 2;
+        int y = (context.getScaledWindowHeight() - size) / 2;
+
+        Identifier texture = player.isBlocking() ? SHIELD_CROSSHAIR : CUSTOM_CROSSHAIR;
+
+        context.drawTexture(
+            RenderPipeline::guiTextured,
+            texture,
+            x, y,
+            0.0F, 0.0F,
+            size, size,
+            size, size
+        );
     }
+}
 }
