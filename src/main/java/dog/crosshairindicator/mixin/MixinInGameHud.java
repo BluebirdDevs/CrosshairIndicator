@@ -33,7 +33,7 @@ public class MixinInGameHud {
             int y = (context.getScaledWindowHeight() - size) / 2;
 
             Identifier texture = player.isBlocking() ? SHIELD_CROSSHAIR : CUSTOM_CROSSHAIR;
-            context.drawGuiTexture(RenderPipelines.CROSSHAIR, texture, x, y, size, size,);
+            context.drawGuiTexture(RenderPipelines.CROSSHAIR, texture, x, y, size, size);
         }
     }
 }
