@@ -27,7 +27,7 @@ public class MixinInGameHud {
 
     @Inject(method = "renderCrosshair", at = @At("TAIL"))
     private void drawCrosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        if (this.client.targetedEntity instanceof PlayerEntity player && this.client.inGameHud.shouldRenderCrosshair()) {
+        if (this.client.targetedEntity instanceof PlayerEntity player && !this.client.inGameHud.shouldRenderCrosshair()) {
             int size = 15;
             int x = (context.getScaledWindowWidth() - size) / 2;
             int y = (context.getScaledWindowHeight() - size) / 2;
