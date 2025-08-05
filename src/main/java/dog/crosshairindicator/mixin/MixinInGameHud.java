@@ -3,7 +3,6 @@ package dog.crosshairindicator.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -33,14 +32,7 @@ public class MixinInGameHud {
             int y = (context.getScaledWindowHeight() - size) / 2;
 
             Identifier texture = player.isBlocking() ? SHIELD_CROSSHAIR : CUSTOM_CROSSHAIR;
-
-            // context.drawGuiTexture(RenderLayer::getCrosshair, texture, x, y, size, size);
-            context.drawTexture(
-                texture, x, y,
-                0, 0,
-                16, 16,
-                16, 16
-            );
+            context.drawTexture(texture, x, y, 0, 0, size, size, size, size);
         }
     }
 }
