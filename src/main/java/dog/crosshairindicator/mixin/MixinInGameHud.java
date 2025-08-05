@@ -36,7 +36,7 @@ public class MixinInGameHud {
 
             // context.drawGuiTexture(RenderLayer::getCrosshair, texture, x, y, size, size);
             context.drawTexture(
-                texture, centerX - 8, centerY - 8,
+                texture, x, y,
                 0, 0,
                 16, 16,
                 16, 16
